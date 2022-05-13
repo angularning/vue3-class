@@ -11,7 +11,7 @@ class ReactiveEffect {
   public active = true; // effect 默认激活状态
   public parent = null;
   public deps = [];
-  constructor(public fn: () => void) {}
+  constructor(public fn: () => void, public scheduler) {}
   run() {
     // 如果是非激活状态 只执行不收集依赖
     if (!this.active) {
@@ -31,20 +31,20 @@ class ReactiveEffect {
     }
   }
   stop() {
-      if(this.active){
-        this.active = false;
-        cleanupEffect(this)
-      }
+    if (this.active) {
+      this.active = false;
+      cleanupEffect(this);
+    }
   }
 }
 
-export function effect(fn: any) {
+export function effect(fn, options: any = {}) {
   // 根据依赖变化会重新执行
-  const _effect = new ReactiveEffect(fn);
+  const _effect = new ReactiveEffect(fn, options.scheduler);
   _effect.run();
-  const runner = _effect.run.bind(_effect)
-  runner.effect = _effect
-  return runner
+  const runner = _effect.run.bind(_effect);
+  runner.effect = _effect;
+  return runner;
 }
 const targetMap = new WeakMap();
 // 一个effect 对应多个属性，一个属性对应多个effct
@@ -80,9 +80,13 @@ export function trigger(target, type, key, value, oldValue) {
     // 需要拷贝一下
     effets = [...effets];
     effets.forEach((effect) => {
-        if (effect !== activeEffect) {
+      if (effect !== activeEffect) {
+        if (effect.scheduler) {
+          effect.scheduler();
+        } else {
           effect.run();
         }
-      });
+      }
+    });
   }
 }
