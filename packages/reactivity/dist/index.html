@@ -22,7 +22,6 @@
             return state.firstName + state.lastName
         })
         effect(() => {
-            console.log(fullName)
             app.innerHTML = fullName.value
         })
         setTimeout(() => {
