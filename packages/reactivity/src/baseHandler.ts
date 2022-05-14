@@ -1,5 +1,7 @@
+import { isObject } from '@vue/shared';
 import { track } from "./effect";
 import { trigger } from "./effect";
+import { reactive } from './reactive';
 // 判断是否是一个代理对象，如果是的话跳过
 export const enum ReactiveFlags {
   IS_REACTIVE = "__v_isReactive",
@@ -13,7 +15,11 @@ export const mutableHandlers = {
       return true;
     }
     track(target, "get", key);
-    return res;
+    if(isObject(res)){
+        return reactive(res);
+    } else {
+        return res;
+    }
   },
   set(target, key, value, receiver) {
     let oldValue = target[key];
