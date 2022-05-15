@@ -7,25 +7,37 @@
         <title>Document</title>
     </head>
     <body>
-        <div id="app"></div>
+        <div id="app">
+            <input type="text" onchange="">
+        </div>
     </body>
     <!-- <script src="../../../node_modules/@vue/reactivity/dist/reactivity.global.js"></script> -->
+    <!-- <script src="../../../node_modules//vue/dist//vue.global.js"></script> -->
     <script src="./reactivity.global.js"></script>
     <script>
-        const { reactive, effect, computed } = vueReactivity
+        const { reactive, effect, watch } = vueReactivity
         const state = reactive({
             firstName: 'w',
-            lastName: 'n'
+            lastName: 'n',
         })
-       const fullName = computed(() => {
-            console.log('runner')
-            return state.firstName + state.lastName
+        // const obj = {
+        //     name: 1
+        // }
+        // const arr = [1,2]
+        watch(() => state.firstName, (newValue, oldValue, onCleanup) => {
+            let clear = true
+            onCleanup(() => {
+                clear = false
+            })
+            console.log(newValue, oldValue)
         })
-        effect(() => {
-            app.innerHTML = fullName.value
-        })
+        // effect(() => {
+        //     app.innerHTML = fullName.value
+        // })
         setTimeout(() => {
-            state.lastName = 'nn'
+            // obj.name = 2
+            // arr.push(3)
+            state.firstName = 1
         }, 1000)
     </script>
 </html>
