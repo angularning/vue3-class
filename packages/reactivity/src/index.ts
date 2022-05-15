@@ -1,4 +1,5 @@
 import { computed } from './computed'
 import { effect } from './effect'
 import { reactive } from './reactive'
-export { effect, reactive, computed }
+import { watch } from './watch'
+export { effect, reactive, computed, watch }
