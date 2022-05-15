@@ -7,3 +7,5 @@
 
 1. vue3设计理念，配置信息，实现项目构建。
 2. reactive的实现。
+3. computed的实现。
+4. watch的实现。
