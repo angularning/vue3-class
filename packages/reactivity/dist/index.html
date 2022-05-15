@@ -8,36 +8,24 @@
     </head>
     <body>
         <div id="app">
-            <input type="text" onchange="">
+            <input type="text" onchange="" />
         </div>
     </body>
     <!-- <script src="../../../node_modules/@vue/reactivity/dist/reactivity.global.js"></script> -->
     <!-- <script src="../../../node_modules//vue/dist//vue.global.js"></script> -->
     <script src="./reactivity.global.js"></script>
     <script>
-        const { reactive, effect, watch } = vueReactivity
-        const state = reactive({
-            firstName: 'w',
-            lastName: 'n',
+        const { effect, ref, toRefs } = vueReactivity
+        // const { effect, ref, toRefs } = Vue
+        const state = ref({ name: 'xxx', age: 8 })
+        const { name, age } = toRefs(state.value)
+        effect(() => {
+            console.log(name.value)
+            app.innerHTML = name.value + age.value
         })
-        // const obj = {
-        //     name: 1
-        // }
-        // const arr = [1,2]
-        watch(() => state.firstName, (newValue, oldValue, onCleanup) => {
-            let clear = true
-            onCleanup(() => {
-                clear = false
-            })
-            console.log(newValue, oldValue)
-        })
-        // effect(() => {
-        //     app.innerHTML = fullName.value
-        // })
         setTimeout(() => {
-            // obj.name = 2
-            // arr.push(3)
-            state.firstName = 1
+            name.value = 'aaa'
+            age.value = 10
         }, 1000)
     </script>
 </html>
