@@ -4,7 +4,7 @@
   "description": "简单实现一下vue3",
   "main": "index.js",
   "scripts": {
-    "dev": "node scripts/dev.js reactivity -f global",
+    "dev": "node scripts/dev.js runtime-core -f global",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -41,7 +41,9 @@ export class ReactiveEffect {
 export function effect(fn, options: any = {}) {
     // 根据依赖变化会重新执行
     const _effect = new ReactiveEffect(fn, options.scheduler)
+    // effect默认执行一次
     _effect.run()
+    // 绑定到当前的effect上
     const runner = _effect.run.bind(_effect)
     runner.effect = _effect
     return runner

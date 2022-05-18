@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/index.ts", "../src/render.ts", "../src/h.ts"],
+  "sourcesContent": ["import { createRenderer } from './render'\nimport { h } from './h'\nexport { createRenderer, h }\n", "export function createRenderer(renderOptions) {\n    const render = (vnode, container) => {}\n    return {\n        render\n    }\n}\n", "export function h() {\n    \n}"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;;;ACAO,0BAAwB,eAAe;AAC1C,UAAM,SAAS,CAAC,OAAO,cAAc;AAAA,IAAC;AACtC,WAAO;AAAA,MACH;AAAA,IACJ;AAAA,EACJ;;;ACLO,eAAa;AAAA,EAEpB;",
+  "names": []
+}
