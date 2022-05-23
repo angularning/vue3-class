@@ -33,8 +33,25 @@ var VueRuntimeCore = (() => {
     };
   }
 
+  // packages/shared/src/index.ts
+  var isObject = (value) => {
+    return value !== null && typeof value === "object";
+  };
+  var isArray = (value) => {
+    return value !== null && Array.isArray(value);
+  };
+
   // packages/runtime-core/src/h.ts
-  function h() {
+  function h(type, propsChildren, children) {
+    const len = arguments.length;
+    if (len === 2) {
+      if (isObject(propsChildren) && !isArray(propsChildren)) {
+      }
+    } else {
+      if (len > 3) {
+      } else {
+      }
+    }
   }
   return __toCommonJS(src_exports);
 })();
